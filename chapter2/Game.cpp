@@ -6,9 +6,9 @@ bool Game::Initialize(){
         SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
         return false;
     }
-    sdlResult = IMG_Init(IMG_INIT_JPG);
-    if(sdlResult != 0){
-        SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
+    sdlResult = IMG_Init(IMG_INIT_PNG);
+    if(sdlResult == 0){
+        SDL_Log("Unable to initialize SDL IMG: %s", SDL_GetError());
         return false;
     }
     mWindow = SDL_CreateWindow(
@@ -133,4 +133,50 @@ void Game::AddSprite(SpriteComponent* sprite){
         }
     }
     mSprites.insert(iter,sprite);
+}
+void Game::RemoveActor(class Actor* actor){
+    auto iter = std::find(mActors.begin(), mActors.end(), actor);
+    if(iter != mActors.end()){
+        mActors.erase(iter);
+    }
+}
+void Game::RemoveSprite(class SpriteComponent* sprite){
+    auto iter = std::find(mSprites.begin(), mSprites.end(), sprite);
+    if(iter != mSprites.end()){
+        mSprites.erase(iter);
+    }
+}
+void Game::LoadData()
+{
+	// Create player's ship
+}
+void Game::UnloadData()
+{
+	// Delete actors
+	// Because ~Actor calls RemoveActor, have to use a different style loop
+	while (!mActors.empty())
+	{
+		delete mActors.back();
+	}
+
+	// Destroy textures
+	for (auto i : mTextures)
+	{
+		SDL_DestroyTexture(i.second);
+	}
+	mTextures.clear();
+}
+void Game::ProcessInput(){
+    SDL_Event event;
+    while(SDL_PollEvent(&event)){
+        switch (event.type)
+        {
+        case SDL_QUIT:
+            mIsRunning = false;
+            break;
+        
+        default:
+            break;
+        }
+    }
 }

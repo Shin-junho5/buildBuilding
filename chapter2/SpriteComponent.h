@@ -1,8 +1,10 @@
 #pragma once
 #include "Component.h"
-class SpriteComponent : public Component{
+#include <SDL2/SDL.h>
+class SpriteComponent : public Component
+{
 public:
-    SpriteComponent(class Actor* owner, int darwOrder = 100);
+    SpriteComponent(class Actor* owner, int drawOrder = 100);
     ~SpriteComponent();
     virtual void Draw(SDL_Renderer* renderer);
     virtual void SetTexture(SDL_Texture* texture);

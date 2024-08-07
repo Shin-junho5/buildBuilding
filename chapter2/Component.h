@@ -1,8 +1,5 @@
 #pragma once
-#include<vector>
-#include<SDL2/SDL.h>
-#include "Game.h"
-#include "Math.h"
+#include "Actor.h"
 class Component{
 public:
     Component(class Actor* owner, int updateOrder = 100);

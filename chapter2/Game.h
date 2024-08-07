@@ -7,11 +7,16 @@
 #include "Component.h"
 #include<unordered_map>
 #include<string>
+#include "SpriteComponent.h"
+#include<algorithm>
 class Game{
 public:
-    void AddActor(Actor* actor);
-    void AddSprite(SpriteComponent* sprite);
-    void UpdateGame();
+    void AddActor(class Actor* actor);
+    void RemoveActor(class Actor* actor);
+
+    void AddSprite(class SpriteComponent* sprite);
+    void RemoveSprite(class SpriteComponent* sprite);
+
     Game(){
         mWindow = nullptr;
         mIsRunning = true;
@@ -20,6 +25,7 @@ public:
     bool Initialize();
     void RunLoop();
     void Shutdown();
+
     SDL_Texture* LoadTexture(const char* fileName);
     SDL_Texture* GetTexture(const std::string& fileName);
 private:
@@ -29,6 +35,8 @@ private:
     void ProcessInput();
     void UpdateGame();
     void GenerateOutput();
+    void LoadData();
+    void UnloadData();
     SDL_Window* mWindow;
     bool mIsRunning;
     SDL_Renderer* mRenderer;
