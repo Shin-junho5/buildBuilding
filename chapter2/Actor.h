@@ -26,7 +26,7 @@ class Actor
     //Getter와 Setter    
     State GetState() const { return mState; }
     float GetScale(){ return mScale;}
-    Vector2 GetPostion(){ return mPosition;}
+    Vector2 GetPosition(){ return mPosition;}
     float GetRotation(){ return mRotation; }
 
     const void SetPosition(const Vector2& pos) {mPosition = pos;}

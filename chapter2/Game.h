@@ -9,6 +9,7 @@
 #include<string>
 #include "SpriteComponent.h"
 #include<algorithm>
+#include "Player.h"
 class Game{
 public:
     void AddActor(class Actor* actor);
@@ -43,4 +44,6 @@ private:
     Uint32 mTicksCount;
     std::unordered_map<std::string, SDL_Texture*> mTextures;
     std::vector<SpriteComponent*> mSprites;
+
+    class Player* mPlayer;
 };

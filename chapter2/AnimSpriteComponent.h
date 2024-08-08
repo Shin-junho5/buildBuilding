@@ -13,4 +13,5 @@ private:
     std::vector<SDL_Texture*> mAnimTextures;
     float mCurrFrame;
     float mAnimFPS;
+    
 };

@@ -32,6 +32,9 @@ bool Game::Initialize(){
         SDL_Log("Failed to create renderer: %s", SDL_GetError());
         return false;
     }
+
+    LoadData();
+    mTicksCount = SDL_GetTicks();
     return true;
 }
 void Game::Shutdown(){
@@ -148,6 +151,9 @@ void Game::RemoveSprite(class SpriteComponent* sprite){
 }
 void Game::LoadData()
 {
+    mPlayer = new Player(this);
+	mPlayer->SetPosition(Vector2(100.0f, 384.0f));
+	mPlayer->SetScale(1.5f);
 	// Create player's ship
 }
 void Game::UnloadData()
@@ -179,4 +185,12 @@ void Game::ProcessInput(){
             break;
         }
     }
+    const Uint8* state = SDL_GetKeyboardState(NULL);
+	if (state[SDL_SCANCODE_ESCAPE])
+	{
+		mIsRunning = false;
+	}
+
+	// Process ship input
+	mPlayer->ProcessKeyboard(state);
 }
