@@ -4,6 +4,9 @@ AnimSpriteComponent::AnimSpriteComponent(Actor* owner, int drawOrder)
 	:SpriteComponent(owner, drawOrder)
 	, mCurrFrame(0.0f)
 	, mAnimFPS(24.0f)
+    , mState(EMultiImage)
+    , mHorizonLength(1)
+    , mVerticalLength(1)
 {
 }
 void AnimSpriteComponent::SetAnimTextures(const std::vector<SDL_Texture*>& textures){
@@ -23,6 +26,18 @@ void AnimSpriteComponent::Update(float deltaTime){
         {
             mCurrFrame -= mAnimTextures.size();
         }
-        SetTexture(mAnimTextures[static_cast<int>(mCurrFrame)]);
+        switch(mState)
+        {
+            case EMultiImage:
+                SetTexture(mAnimTextures[static_cast<int>(mCurrFrame)]);
+                break;
+            case EOneLineSheet:
+                break;
+            case EMultiLineSheet:
+                break;
+            default:
+                break;
+        }
+        
     }
 }
